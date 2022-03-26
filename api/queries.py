@@ -36,11 +36,9 @@ def getPost_resolver(obj, info, id):
 
 @convert_kwargs_to_snake_case
 def getPost_resolver_by_title(obj, info, title):
-    print('to chamando')
     try:
         post = Post.query.filter_by(title=title).first()
 
-        print(post)
         payload = {
             "success": True,
             "post": post.to_dict()
@@ -48,6 +46,6 @@ def getPost_resolver_by_title(obj, info, title):
     except AttributeError:
         payload = {
             "success": False,
-            "errors": ["Post item matching {id} not found"]
+            "errors": ["Post item matching {title} not found"]
         }
     return payload
